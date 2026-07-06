@@ -1,42 +1,38 @@
 # Blast Off Cleaning — Website
 
 Single-page marketing site for Blast Off Cleaning, a local pressure washing
-business. Built with React + Vite, Tailwind CSS, and Framer Motion, deployed to
-GitHub Pages.
+business. The entire site is **one file** — [`index.html`](index.html) — with
+all styles and scripts inline. No build step, no dependencies.
 
 ## Before launch — the owner's checklist
 
-Every business-specific value lives in **one file**: [`src/config/business.js`](src/config/business.js).
-Replace each `[bracketed]` placeholder there:
+Open [`index.html`](index.html) and find the **`BUSINESS CONFIG`** block near
+the bottom (inside the `<script>` tag). Replace each `[bracketed]` placeholder:
 
-1. **`PHONE_NUMBER`** — the real number. All `sms:`/`tel:` links derive from it automatically.
+1. **`PHONE_NUMBER`** — the real number. All text/call links derive from it automatically.
 2. **`SERVICE_AREA`** — the town, e.g. `"Scarsdale, NY"`.
 3. **`INSTAGRAM_HANDLE`** and **`FACEBOOK_URL`** — social profiles.
 4. **`FORMSPREE_ENDPOINT`** — create a free form at [formspree.io](https://formspree.io)
    and paste the endpoint. Until then the contact form politely redirects
    visitors to texting.
-5. **Real before/after photos** — drop them in `public/assets/gallery/` with the
-   filenames listed in [`src/config/gallery.js`](src/config/gallery.js). Until
-   they exist, the Results section shows an honest "real photos in progress"
+5. **Real before/after photos** — drop them in `assets/gallery/` with the
+   filenames listed in the `GALLERY_PAIRS` config (same block). Until they
+   exist, the Results section shows an honest "real photos in progress"
    state — no stock or fake photos, ever.
 
-## Development
+## Editing
 
-```bash
-npm install
-npm run dev      # local dev server
-npm run build    # production build → dist/
-npm run preview  # preview the production build
-```
+It's one HTML file. Colors and fonts are defined as CSS variables at the top of
+the `<style>` block; every section is labeled with a `═══ SECTION ═══` comment.
+Edit, push, done.
 
 ## Deployment
 
-Pushes to `main` deploy automatically via GitHub Actions
-([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)).
+Pushes to the default branch deploy automatically via GitHub Actions
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) — the workflow
+just uploads the repo to GitHub Pages, nothing to compile.
 
-One-time setup: in the repo's **Settings → Pages**, set **Source** to
-**GitHub Actions**.
+Live at: **https://northsskin.github.io/pressure-wash/**
 
-The site is served at `https://<user>.github.io/pressure-wash/`. If the repo is
-renamed or moved to a custom domain, update `base` in `vite.config.js` and the
-Open Graph URLs in `index.html`.
+If the repo is renamed or moved to a custom domain, update the Open Graph
+`og:image` / `og:url` tags near the top of `index.html`.
