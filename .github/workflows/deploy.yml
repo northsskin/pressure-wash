@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # The feature branch is currently the repo's default branch; once the site
+    # is merged into main, the extra entry can be removed.
+    branches: [main, claude/blast-off-cleaning-site-o464wd]
   workflow_dispatch:
 
 permissions:
@@ -25,7 +27,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # enablement: true switches the repo's Pages mode to "GitHub Actions"
+      # (away from legacy branch deployment, which serves unbuilt source).
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
